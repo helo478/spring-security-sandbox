@@ -20,8 +20,8 @@ public class PermissionEvaluatorImpl implements PermissionEvaluator {
 
 		if ((authentication == null) || (targetId == null) || (targetType == null) || (requiredPrivilege == null)
 				|| !(requiredPrivilege instanceof String)) { return false; }
-		return hasPrivilege(authentication, targetId.toString().toUpperCase(), targetType.toUpperCase(),
-				requiredPrivilege.toString().toUpperCase());
+		return hasPrivilege(authentication, targetId.toString().toLowerCase(), targetType.toLowerCase(),
+				requiredPrivilege.toString().toLowerCase());
 	}
 
 	private boolean hasPrivilege(Authentication auth, Serializable targetId, String targetType,

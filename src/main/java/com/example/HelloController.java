@@ -14,32 +14,32 @@ public class HelloController {
         return "Greetings from Spring Boot!";
     }
     
-    @RequestMapping("/rick_lab/{function}")
-    @PreAuthorize("hasPermission(#function, 'rick_lab', 'owner')")
-    public String rickLabOwner(final @PathVariable ("function") String function) {
+    @RequestMapping("/stark_tower/{system}/usage")
+    @PreAuthorize("hasPermission(#system, 'stark_tower', 'usage')")
+    public String starkTowerUsage(final @PathVariable ("system") String system) {
     	
-    	return String.format("You are an authorized owner for function %s of rick's lab", function);
+    	return String.format("You are authorized for usage of the %s in Stark Tower", system);
     }
     
-    @RequestMapping("/rick_lab/{function}")
-    @PreAuthorize("hasPermission(#function, 'rick_lab', 'admin')")
-    public String rickLabAdmin(final @PathVariable ("function") String function) {
+    @RequestMapping("/stark_tower/{system}/self_destruct")
+    @PreAuthorize("hasPermission(#system, 'stark_tower', 'self_destruct')")
+    public String starkTowerSelfDestruct(final @PathVariable ("system") String system) {
     	
-    	return String.format("You are an authorized admin for function %s of rick's lab", function);
+    	return String.format("You are authorized to engage self-destruct of %s in Stark Tower", system);
     }
     
-    @RequestMapping("/vindicator_base/{function}")
-    @PreAuthorize("hasPermission(#function, 'vindicator_base', 'owner')")
-    public String vindicatorBaseOwner(final @PathVariable ("function") String function) {
+    @RequestMapping("/shield_base/{system}/usage")
+    @PreAuthorize("hasPermission(#system, 'shield_base', 'usage')")
+    public String shieldBaseUsage(final @PathVariable ("system") String system) {
     	
-    	return String.format("You are an authorized owner for function %s of the vindicator base", function);
+    	return String.format("You are authorized for usage of the %s in the SHIELD base", system);
     }
     
-    @RequestMapping("/vindicator_base/{function}")
-    @PreAuthorize("hasPermission(#function, 'vindicator_base', 'admin')")
-    public String vindicatorBaseAdmin(final @PathVariable ("function") String function) {
+    @RequestMapping("/shield_base/{system}/self_destruct")
+    @PreAuthorize("hasPermission(#system, 'shield_base', 'self_destruct')")
+    public String shieldBaseSelfDestruct(final @PathVariable ("system") String system) {
     	
-    	return String.format("You are an authorized admin for function %s of the vindicator base", function);
+    	return String.format("You are authorized to engage self-destruct of %s in the SHIELD base", system);
     }
 
 }

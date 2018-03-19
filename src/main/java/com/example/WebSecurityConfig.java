@@ -1,6 +1,5 @@
 package com.example;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -25,36 +25,50 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-		final GrantedAuthority ownerAndAdminOfRickLabParticleAccelerator = new GrantedAuthorityImpl("rick_lab",
-				"particle_accelerator", new String[] { "owner", "admin" });
-
-		final GrantedAuthority administratorOfRickLabParticleAccelerator = new GrantedAuthorityImpl("rick_lab",
-				"particle_accelerator", new String[] { "admin" });
-
-		final GrantedAuthority ownerAndAdminOfVindicatorBaseParticleAccelerator = new GrantedAuthorityImpl(
-				"vindicator_base", "particle_accelerator", new String[] { "owner", "admin" });
-
-		final GrantedAuthority adminOfVindicatorBaseWasteDisposal = new GrantedAuthorityImpl("vindicator_base",
-				"waste_disposal", new String[] { "admin" });
-
-		final List<GrantedAuthority> rickAuthorities = new ArrayList<>();
-		rickAuthorities.add(ownerAndAdminOfRickLabParticleAccelerator);
-		rickAuthorities.add(administratorOfRickLabParticleAccelerator);
-
-		final List<GrantedAuthority> mortyAuthorities = new ArrayList<>();
-		mortyAuthorities.add(administratorOfRickLabParticleAccelerator);
-		mortyAuthorities.add(ownerOfVindicatorBaseParticleAccelerator); // TODO: fix this
+		final List<GrantedAuthority> tonyStarkAuthorities = new ArrayList<>();
+		final List<GrantedAuthority> rhodeyAuthorities = new ArrayList<>();
+		final List<GrantedAuthority> pepperPottsAuthorities = new ArrayList<>();
+		final List<GrantedAuthority> philCoulsonAuthorities = new ArrayList<>();
+		final List<GrantedAuthority> daisyJohnsonAuthorities = new ArrayList<>();
+		
+		tonyStarkAuthorities.add(new GrantedAuthorityImpl("stark_tower", "particle_accelerator", new String[] { "usage", "self_destruct" }));
+		tonyStarkAuthorities.add(new GrantedAuthorityImpl("stark_tower", "armory", new String[] { "usage", "self_destruct" }));
+		
+		rhodeyAuthorities.add(new GrantedAuthorityImpl("stark_tower", "armory", new String[] { "usage" }));
+		
+		pepperPottsAuthorities.add(new GrantedAuthorityImpl("stark_tower", "particle_accelerator", new String[] { "usage" }));
+		
+		philCoulsonAuthorities.add(new GrantedAuthorityImpl("shield_base", "containment", new String[] { "usage", "self_destruct" }));
+		philCoulsonAuthorities.add(new GrantedAuthorityImpl("shield_base", "armory", new String[] { "usage", "self_destruct" }));
+		
+		daisyJohnsonAuthorities.add(new GrantedAuthorityImpl("shield_base", "containment", new String[] { "usage" }));
+		daisyJohnsonAuthorities.add(new GrantedAuthorityImpl("shield_base", "armory", new String[] { "usage" }));
 
 		auth.inMemoryAuthentication() //@formatter:off
-				.withUser("rick")
+				.withUser("tony_stark")
 					.password("password")
 					.roles("USER")
-					.authorities(rickAuthorities)
+					.authorities(tonyStarkAuthorities)
 			.and()
-				.withUser("morty")
+				.withUser("rhodey")
 					.password("password")
 					.roles("USER")
-					.authorities(mortyAuthorities); //@formatter:on
+					.authorities(rhodeyAuthorities)
+			.and()
+				.withUser("pepper_potts")
+					.password("password")
+					.roles("USER")
+					.authorities(pepperPottsAuthorities)
+			.and()
+				.withUser("phil_coulson")
+					.password("password")
+					.roles("USER")
+					.authorities(philCoulsonAuthorities)
+			.and()
+				.withUser("daisy_johnson")
+					.password("password")
+					.roles("USER")
+					.authorities(daisyJohnsonAuthorities); //@formatter:on
 	}
 
 }
